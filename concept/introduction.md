@@ -1,31 +1,29 @@
-== Introduction
+## Introduction
 
-//// This entire chapter is so abstract, it provides very limited value
-to users. ////
 
-=== Managing Environments Seamlessly
+### Managing Environments Seamlessly
 
-CFEngine was designed to enable scalable configuration management in any
-kind of environment with an emphasis on supporting larger systems with
-partial of unreliable connectivity. While almost every other system for
-configuration management assumes a reliable network connection to enable
-top-down authority of central servers. These systems tend to fail in the
-following environments:
+CFEngine was designed to enable scalable configuration management in
+any kind of environment with an emphasis on supporting larger systems
+with partial of unreliable connectivity. While almost every other
+system for configuration management assumes a reliable network
+connection to enable top-down authority of central servers. These
+systems tend to fail in the following environments:
 
--   Systems with partial or unreliable connectivity (e.g. mobile phones,
-    airplanes, a submarine).
+-   Systems with partial or unreliable connectivity (e.g. mobile
+    phones, airplanes, a submarine).
 
 -   Low Bandwidth Systems (e.g. a satellite or space probe).
 
 -   Low Power Systems (e.g. ad hoc sensors or kitchen appliances).
 
 CFEngine doesn't depend on or assume the presence of reliable
-infrastructure. It works opportunistically in any environment, using the
-fewest possible resources, and it has a limited set of software
-dependencies. It can run anywhere, and this lean approach to CFEngine's
-architecture makes it possible to support both traditional server-based
-approaches to configuration as well as more novel platforms for
-configuration including embedded and mobile systems.
+infrastructure. It works opportunistically in any environment, using
+the fewest possible resources, and it has a limited set of software
+dependencies. It can run anywhere, and this lean approach to
+CFEngine's architecture makes it possible to support both traditional
+server-based approaches to configuration as well as more novel
+platforms for configuration including embedded and mobile systems.
 
 At this point, you might be wondering if CFEngine makes sense for your
 requirements. After all, not everyone is managing on a sensor network,
@@ -34,15 +32,12 @@ networks can have reliability issues, and as systems move to the cloud
 and rely more on networks and systems not under your direct control
 designing for efficiency and disconnection can yield benefits.
 
-//// OMG this entire section makes CFEngine sound like the wrong tool
-for just about everyone. Submarines and space probes? ////
-
 CFEngine's design allows you to create fault-tolerant, available systems
 which are independent of external requirements. CFEngine works in all
 the places you think it should, and all the new places you haven't even
 thought of yet.
 
-=== Managing Expectations with Promises
+### Managing Expectations with Promises
 
 One of the hardest things in management is to make everyone aware of
 their roles and tasks, and to be able to rely on others to do the same.
@@ -77,7 +72,7 @@ both when managing machines and people.
 Combining promises with patterns to describe where and when promises
 should apply is what CFEngine is all about.
 
-=== The Importance of Automation
+### The Importance of Automation
 
 Users are good at making decisions and awful at reliable implementation.
 Machines are pitiful at making decisions and very good at reliable
@@ -93,10 +88,6 @@ promises, and they don't need to be given explicit instructions for
 completing tasks. If it your job to come up with a suitable promise, to
 make decisions about the systems you are managing, and it if the
 client's job to automate and deliver a promise.
-
-//// I think these analogies are at the core of the business, but you
-have to understand that they are confusing. Also stop using the term
-"human". ////
 
 This separation of concerns is often violated in systems that require
 users to write explict instructions for even the simplest tasks. If the
@@ -127,7 +118,7 @@ in repetitive and reliable ways is what dehumanizes people. The only way
 to make progress with a bad habit is to recognize it as one and be
 willing to abandon the habit.
 
-=== What is CFEngine?
+### What is CFEngine?
 
 At its code, CFEngine is a simple framework based on promises which
 supplies a rich standard library of tools to implement and manage very
@@ -155,7 +146,7 @@ promises. CFEngine language is a language of promises, in which you
 express very high-level intentions about a system. CFEngine then takes
 the promises and compiles them into real-world action.
 
-=== Why does Knowledge Matter?
+### Why does Knowledge Matter?
 
 Above all, CFEngine promotes a human understanding of complex processes.
 Its promises are easily documentable using comments that the system
