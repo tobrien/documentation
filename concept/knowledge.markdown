@@ -1,5 +1,4 @@
-[[knowledge]]
-== Knowledge Management
+## Knowledge Management
 
 A unique aspect of CFEngine, that is fully developed in the commercial
 editions of the software, its ability to enable integrated knowledge
@@ -13,7 +12,7 @@ they have not been documented and entered into posterity. Now you can
 alleviate this problem with some simple rules of thumb and even build
 sophisticated index-databases of documents.
 
-=== Promises and Knowledge
+### Promises and Knowledge
 
 The learning curve for configuration management systems has been the
 brunt of frequent criticism over the years. Users are expected to
@@ -52,7 +51,7 @@ configuration; conversely, a simple model of policy configuration can
 manufacture a knowledge structure just as it might manufacture a
 filesystem or a set of services.
 
-=== The basics of knowledge
+### The basics of knowledge
 
 Knowledge only truly begins when we write things down:
 
@@ -79,7 +78,7 @@ documentation from these technical annotations. It can do this because
 a lot of thought has already gone into the meaning of the promise
 model.
 
-=== Annotating promises
+### Annotating promises
 
 The beginning of knowledge is to annotate the technical
 specifications. Remember that the point of a promise is to convey an
@@ -90,8 +89,8 @@ to them in other promise statements. A handle could be something dumb
 like `xyz', but you should try to use more meaningful titles to help
 make references clear.
 
-----
-files:
+
+    files:
 
     "/var/cfengine/inputs"
         handle => "update_policy",
@@ -101,35 +100,29 @@ files:
         depth_search => recurse("inf"),
         file_select => input_files,
         action => immediate;
-----
 
 If a promise affects another promise in some way, you can make the
 affected one promise one of the promisees, like this: access:
 
-----
-"/master/CFEngine/inputs" -> { "update_policy", "other_promisee" },
+    "/master/CFEngine/inputs" -> { "update_policy", "other_promisee" },
 
-handle  => "serve_updates",
-  admit   => { "217.77.34.*" };
-----
+    handle  => "serve_updates",
+      admit   => { "217.77.34.*" };
 
 Conversely, if a promise might depend on another in some (even indirect) way, document this too.
 
-----
-files:
+    files:
 
-"/var/cfengine/inputs"
+    "/var/cfengine/inputs"
 
       handle => "update_policy",
-     comment => "Update the CFEngine input files from the policy  
-server",
-  depends_on => { "serve_updates" },
-       perms => system("600"),
-   copy_from => rcp("$(master_location)","$(policy_server)"),
-depth_search => recurse("inf"),
-file_select => input_files,
-      action => immediate;
-----
+     comment => "Update the CFEngine input files from the policy  server",
+     depends_on => { "serve_updates" },
+     perms => system("600"),
+     copy_from => rcp("$(master_location)","$(policy_server)"),
+     depth_search => recurse("inf"),
+     file_select => input_files,
+     action => immediate;
 
 This use of annotation is the first level of documentation in
 CFEngine. The annotations are used internally by CFEngine to provide
@@ -142,32 +135,29 @@ The CFEngine Knowledge Map is only available in commercial editions of
 the software, where the necessary support to set up and maintain this
 technology can be provided.
 
-=== A promise model of topic maps
+### A promise model of topic maps
 
 CFEngine's model of promises can also be used to promise information
 and its relevance in different contexts. The Knowledge agent cf-know
 understands three kinds of promise.
 
-topics::
-    A topic is merely a string that can be associated with another
-    string. It represents a `subject to be talked about'. Like other
+* topics - A topic is merely a string that can be associated with
+    another string. It represents a `subject to be talked about'. Like other
     promise types, you can use contexts, which are formed from other
     topics expressions to limit the scope of the current topic promise.
 
-things::
-    Things are a simplified interface to topics, that were introduced
+* things - Things are a simplified interface to topics, that were introduced
     to make it easier for users to contribute knowledge about more
     concrete `things', or less abstract ideas. A challenge with
     knowledge management is the abstract and technical nature of the
     models one must use to represent it. Things attempt to make that task
     easier.
 
-occurrences::
-    An occurrence is a reference to a document or a piece of text that
+* occurrences - An occurrence is a reference to a document or a piece of text that
     actually represents knowledge content about the topic concerned.
     Occurrences are generally URLs or strings explaining things or topics.
 
-=== What topic maps offer
+### What topic maps offer
 
 CFEngine is capable of automating the documentation of a policy, using
 basic annotations provided above, as a knowledge map. They require
@@ -227,7 +217,7 @@ together documents of any kind. A CFEngine knowledge base is not a new
 document format, it is an overlay map that joins ideas and resources
 together, and displays relationships.
 
-=== The nuts and bolts of topic maps
+### The nuts and bolts of topic maps
 
 Topic maps are really electronic indices, but they form and work like
 webs. A topic is the technical representation of a `subject', i.e.
@@ -253,29 +243,23 @@ association between topics. Unlike an ordinary index, a topic map has
 a rich (potentially infinite) variety of cross reference types. For
 instance,
 
-----
      topic_1 ``is a kind of'' topic_2
      topic_1 ``is improved by'' topic 2
      topic_1 ``solves the problem of'' topic_2
-----
 
 The topic map model thus has three levels of containers:
 
-Contexts::
-    The box into which we classify a topic to disambiguate different
-    topics with the same name (`in the context of')2.
+* Contexts - The box into which we classify a topic to disambiguate
+  different topics with the same name (`in the context of')2.
 
-Topics/Things::
-    The representation of a subject (an index term). 
+* Topics/Things - The representation of a subject (an index term). 
 
-Occurrence Types::
-    A term that explains how an actual document occurrence relates to
-    the topic is claims to say something about. e.g. (tutorial,
+* Occurrence Types - A term that explains how an actual document
+    occurrence relates to the topic is claims to say something about. e.g. (tutorial,
     manual, or example,  definition, photo-album etc). 
 
-Occurrences::
-    Specific information resources: these are pointers to the actual
-    documents that we want to read (like page numbers in an index).
+* Occurrences - Specific information resources: these are pointers to
+  the actual documents that we want to read (like page numbers in an index).
 
 Contexts map conveniently into CFEngine classes. Topics map
 conveniently into promisers. Occurrences also map to promisers of a
@@ -297,7 +281,7 @@ Each topic allows us to effectively `shine a light' onto the
 occurrences of information that highlight the concepts pertinent to
 the topic somehow.
 
-=== Example of topics promises
+### Example of topics promises
 
 You can use cf-know to render a topic map either as text (for command
 line use) or as HTML (for web rendering). We begin with the text
@@ -306,7 +290,6 @@ database.
 
 Try typing in the following knowledge promises:
 
-----
      body common control
      {
      bundlesequence  => { "tm" };
@@ -357,50 +340,45 @@ Try typing in the following knowledge promises:
      backward_relationship => "$(b)";
      associates => { $(name) };
      }
-----
 
 The simplified things interface is similar, but uses fixed relations:
 
-----
-bundle knowledge company_knowledge
-{
-things:
- regions::
+    bundle knowledge company_knowledge
+    {
+    things:
+     regions::
 
-   "EMEA"     comment => "Europe, The Middle-East and Africa";
-   "APAC"     comment => "Asia and the Pacific countries";
+       "EMEA"     comment => "Europe, The Middle-East and Africa";
+       "APAC"     comment => "Asia and the Pacific countries";
 
- countries::
-   "UK"            synonyms => { "Great Britain" },
+     countries::
+       "UK"            synonyms => { "Great Britain" },
               is_located_in => { "EMEA", "Europe" };
 
-   "Netherlands"   synonyms => { "Holland" },
+       "Netherlands"   synonyms => { "Holland" },
               is_located_in => { "EMEA", "Europe" };
 
-   "Singapore"     is_located_in => { "APAC", "Asia" };
+       "Singapore"     is_located_in => { "APAC", "Asia" };
 
- locations::
-   "London_1"    is_located_in => { "London", "UK" };
-   "New_Jersey"  is_located_in => { "USA" };
+     locations::
+       "London_1"    is_located_in => { "London", "UK" };
+       "New_Jersey"  is_located_in => { "USA" };
 
- networks::
+     networks::
 
-  "192.23.45.0/24"         comment => "Secure network, zone 0. Single octet for corporate offices",
+      "192.23.45.0/24"         comment => "Secure network, zone 0. Single octet for corporate offices",
                    is_connected_to => { "oslo-hub-123" };
-----
 
-==== Analyzing and indexing the policy
+#### Analyzing and indexing the policy
 
 CFEngine can analyze the promises you have made, index and cross reference them using the command:
 
-----
-# cf-promises -r
-----
+    # cf-promises -r
 
 Normally, the default policy in Nova or Constellation will perform this command each time the policy is changed.
 Previous: Analyzing and indexing the policy, Up: Example of topics promises
 
-==== cf-know
+#### cf-know
 
 CFEngine's knowledge agent cf-know allows you to make promises about
 knowledge and its inter-relationships. It is not specifically a
@@ -410,9 +388,7 @@ compiled into a topic map.
 
 To build a topic map from a set of knowledge promises in knowledge.cf, you would write:
 
-----
-# cf-know -b -f ./knowledge.cf
-----
+    # cf-know -b -f ./knowledge.cf
 
 The syntax of this file is hinted at below. The full ISO standard
 topic map model is too rich to be a useful tool for system knowledge
@@ -421,7 +397,6 @@ can help to simplify the process: encoding a topic map is a complex
 problem in configuration, which is exactly what CFEngine is for.
 CFEngine's topic map promises have the following form:
 
-----
      bundle knowledge example
      {
      topics:
@@ -443,24 +418,21 @@ CFEngine's topic map promises have the following form:
      
          represents => { "Definition", "Tutorial"}; # sub-types
      }
----- 
 
 The association body templates look like this:
 
-----
-body association a(f,name,b)
-{
-forward_relationship => "$(f)";
-backward_relationship => "$(b)";
-associates => { $(name) };
-}
-----
+    body association a(f,name,b)
+    {
+    forward_relationship => "$(f)"; 
+    backward_relationship => "$(b)";
+    associates => { $(name) };
+    }
 
 Promise theory adds a clear structure to the topic map ontology, which
 is highly beneficial as experience shows that weak conceptual models
 lead to poor knowledge maps.
 
-=== Modeling configuration promises as topic maps
+### Modeling configuration promises as topic maps
 
 We can model topic maps as promises within CFEngine; the question then
 remains as to how to use topic maps to model configurations so that
@@ -474,62 +446,54 @@ topics and the turning each promise into a meta-promise that models
 the configuration as a topic with attendant associations. Consider the
 following CFEngine promise.
 
-----
-bundle agent update
-{
-files:
+    bundle agent update
+    {
+    files:
 
-any::
+    any::
 
-``/var/cfengine/inputs'' -> { ``policy_team'', ''dependent'' },
+    "/var/cfengine/inputs'' -> { "policy_team'', ''dependent'' },
 
-          comment => ``Check policy updates from source'',
-            perms => true,
-             mode => 600,
+        comment => ``Check policy updates from source'',
+        perms => true,
+        mode => 600,
         copy_from => true,
-      copy_source => /policy/masterfiles,
-          compare => digest,
-     depth_search => true,
-            depth => inf,
-         ifelapsed => 1;
+        copy_source => /policy/masterfiles,
+        compare => digest,
+        depth_search => true,
+        depth => inf,
+        ifelapsed => 1;
 
 }
-----
 
 This system configuration promise can be mapped by CFEngine into a
 number of other promise proposals intended for the cf-know agent.
 Suppressing some of the details, we have:
 
-----
-type_files::
+    type_files::
 
-"/var/cfengine/inputs"
-    association => a("promise made in bundle","update","bundle  
-contains promise");
-"/var/cfengine/inputs"
-    association => a("specifies body type","perms","is specified in");
-"/var/cfengine/inputs"
-    association => a("specifies body type","mode","is specified in");
-"/var/cfengine/inputs"
-    association => a("specifies body type","copy_from","is specified  
-in");
+    "/var/cfengine/inputs"
+        association => a("promise made in bundle","update","bundle contains promise");
+    "/var/cfengine/inputs"
+        association => a("specifies body type","perms","is specified in");
+    "/var/cfengine/inputs"
+        association => a("specifies body type","mode","is specified in");
+    "/var/cfengine/inputs"
+        association => a("specifies body type","copy_from","is specified  in");
 
-# etc ...
+    # etc ...
+    occurrences:
 
+        _var_CFEngine_inputs::
 
-occurrences:
-
-_var_CFEngine_inputs::
-
-  "promise_output_common.html#promise__var_CFEngine_inputs_update_cf_13"
-     represents => { "promise definition" };
-----
+        "promise_output_common.html#promise__var_CFEngine_inputs_update_cf_13"
+             represents => { "promise definition" };
 
 Note that in this mapping, the actual promise (viewed as a real world
-entity) is an occurrence of the topic `promise'; at the same time each
+entity) is an occurrence of the topic 'promise'; at the same time each
 promise could be discussed as a different topic allowing meta-modeling
 of the entity-relation model in the real-world data. Conversely the
-topics themselves become configuration items or `promisers' in the
+topics themselves become configuration items or 'promisers' in the
 promise model. The effect is to create a navigable semantic web for
 traversing the policy; this documents the structure and intention of
 the policy using a small ontology of standard concepts and can be

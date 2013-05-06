@@ -10,12 +10,12 @@ system for configuration management assumes a reliable network
 connection to enable top-down authority of central servers. These
 systems tend to fail in the following environments:
 
--   Systems with partial or unreliable connectivity (e.g. mobile
+- Systems with partial or unreliable connectivity (e.g. mobile
     phones, airplanes, a submarine).
 
--   Low Bandwidth Systems (e.g. a satellite or space probe).
+- Low Bandwidth Systems (e.g. a satellite or space probe).
 
--   Low Power Systems (e.g. ad hoc sensors or kitchen appliances).
+- Low Power Systems (e.g. ad hoc sensors or kitchen appliances).
 
 CFEngine doesn't depend on or assume the presence of reliable
 infrastructure. It works opportunistically in any environment, using
@@ -102,15 +102,11 @@ management systems which are full of ad-hoc, one-off implementations of
 important process. These ad-hoc systems are often full of mystery. When
 a system is based on ad-hoc, user-driven configuration:
 
--   Others have no idea how a system has been assembled and how it is
-    being managed.
+- Others have no idea how a system has been assembled and how it is being managed.
 
--   There is no record of changes or intentions. The only way to
-    understand a complex, ad-hoc system is to walk through the code line
-    by line.
+- There is no record of changes or intentions. The only way to understand a complex, ad-hoc system is to walk through the code line by line.
 
--   Systems should be considered damaged, they are figuratively
-    "scarred" from the ad-hoc intervention of a user.
+- Systems should be considered damaged, they are figuratively "scarred" from the ad-hoc intervention of a user.
 
 People opposed to automation often say that it dehumanizes their work.
 In fact the opposite is true: forcing humans to do the work of machines,
